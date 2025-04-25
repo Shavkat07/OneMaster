@@ -20,14 +20,15 @@ It's ideal for trainers who want to move from paper notebooks and messy spreadsh
 
  - 🧩 Project Structure (Django Apps)
 
-App Name | Description
-fitness_clubs | Manage gyms and fitness club details
-trainers | Trainer profiles linked to Django users
-clients | Manage clients, health data, and workout notes
-visits | Track when clients attend sessions
-payments | Record client payments and financial summaries
-dashboard | Data analytics and performance charts
-accounts | User authentication and role management
+| App Name      | Description                                    |                                    
+|---------------|------------------------------------------------| 
+| fitness_clubs | Manage gyms and fitness club details           |
+| trainers      | Trainer profiles linked to Django users        |
+| clients       | Manage clients, health data, and workout notes |
+| visits        | Track when clients attend sessions             |
+| payments      | Record client payments and financial summaries |
+| dashboard     | Data analytics and performance charts          |
+| accounts      | User authentication and role management        |
 
 ## 🛠️ Technologies
 
@@ -69,7 +70,7 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
-🤝 Author
+## 🤝 Author
 Shavkat
 Student @ PDP University, Tashkent
 Passionate about Python, backend systems, and building real-world projects
