@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from clients.models import Client, TrainingPlan
+
+
+admin.site.register([Client, TrainingPlan])
