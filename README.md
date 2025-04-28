@@ -27,7 +27,7 @@ It's ideal for trainers who want to move from paper notebooks and messy spreadsh
 | clients       | Manage clients, health data, and workout notes |
 | visits        | Track when clients attend sessions             |
 | payments      | Record client payments and financial summaries |
-| dashboard     | Data analytics and performance charts          |
+| analytics     | Data analytics and performance charts          |
 | accounts      | User authentication and role management        |
 
 ## 🛠️ Technologies
