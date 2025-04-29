@@ -7,5 +7,9 @@ from fitness_clubs.serializers import FitnessClubSerializer
 
 # Create your views here.
 class FitnessClubsViewSet(ModelViewSet):
-	model = FitnessClub
+	queryset = FitnessClub.objects.none()
 	serializer_class = FitnessClubSerializer
+
+	def get_queryset(self):
+		return FitnessClub.objects.all()
+

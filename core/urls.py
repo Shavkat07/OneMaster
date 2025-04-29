@@ -23,15 +23,12 @@ urlpatterns = [
     path("api/v1/fitness_clubs/", include("fitness_clubs.urls")),  # Аутентификация
     path("api/v1/clients/", include("clients.urls")),  # Профиль, документы, здоровье
     path("api/v1/payments/", include("payments.urls")),  # Блог
-
     # Swagger JSON
     path('api/v1/schema/', SpectacularAPIView.as_view(), name='schema'),
-
     # Swagger UI
     path('api/v1/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-
     # Redoc
     path('api/v1/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-
+    path('api/v1/auth/', include('dj_rest_auth.urls'))
 
 ]

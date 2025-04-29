@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,7 +34,15 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'jazzmin',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt.token_blacklist',
     'drf_spectacular',
+    'allauth',
+    'allauth.account',
+    'drf_spectacular_sidecar',  # Для статики Swagger UI
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +50,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
+
 
     'accounts',
     'analytics',
@@ -52,6 +64,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "allauth.account.middleware.AccountMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -137,8 +150,56 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
-    # YOUR SETTINGS
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+		'rest_framework_simplejwt.authentication.JWTAuthentication',
+	),
+	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+	'PAGE_SIZE': 10,
+	'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+REST_AUTH = {
+	'USE_JWT': True,
+	'JWT_AUTH_HTTPONLY': False,
+	# 'LOGIN_SERIALIZER': 'custom_auth.serializers.CustomLoginSerializer',
+	# "REGISTER_SERIALIZER": "custom_auth.serializers.CustomRegisterSerializer",
+	# 'TOKEN_SERIALIZER': 'custom_auth.serializers.CustomTokenSerializer',
+}
+AUTHENTICATION_BACKENDS = [
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
+
+
+REST_USE_JWT = True
+
+SIMPLE_JWT = {
+	'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+	'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+	'ROTATE_REFRESH_TOKENS': True,
+	'BLACKLIST_AFTER_ROTATION': True,
+	'ALGORITHM': 'HS256',
+	'SIGNING_KEY': SECRET_KEY,
+	'VERIFYING_KEY': None,
+	'AUDIENCE': None,
+	'ISSUER': None,
+	'AUTH_HEADER_TYPES': ('Bearer',),
+	'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+	'USER_ID_FIELD': 'id',
+	'USER_ID_CLAIM': 'user_id',
+	'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+	'AUTH_TOKEN_CLASSES': (
+	'rest_framework_simplejwt.tokens.AccessToken', 'rest_framework_simplejwt.tokens.RefreshToken',),
+	'TOKEN_TYPE_CLAIM': 'token_type',
+	'JTI_CLAIM': 'jti',
+	'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+	'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+	'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
 SPECTACULAR_SETTINGS = {

@@ -8,6 +8,8 @@ from payments.serializers import PaymentSerializer
 # Create your views here.
 
 class PaymentViewSet(ModelViewSet):
-	model = Payment
+	queryset = Payment.objects.none()
 	serializer_class = PaymentSerializer
 
+	def get_queryset(self):
+		return Payment.objects.all()

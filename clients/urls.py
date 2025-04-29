@@ -5,7 +5,7 @@ from .views import ClientViewSet
 
 router = DefaultRouter()
 
-router.register(r'trainers', ClientViewSet, basename='trainers')
+router.register(r'client', ClientViewSet, basename='client')
 
 urlpatterns = [
 	path('', include(router.urls)),  # Все `ViewSet` уже включены сюда
