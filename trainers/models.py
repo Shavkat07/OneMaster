@@ -10,7 +10,7 @@ class Trainer(models.Model):
     fitness_club = models.ForeignKey(FitnessClub, on_delete=models.CASCADE)
     experience_years = models.IntegerField()
     bio = models.TextField(blank=True)
-    avatar = models.ImageField(upload_to='trainers/avatars/', blank=True)
+    avatar = models.ImageField(upload_to='trainers/avatars/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

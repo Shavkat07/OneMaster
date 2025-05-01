@@ -8,11 +8,9 @@ from clients.models import Client
 # Create your views here.
 
 class ClientViewSet(ModelViewSet):
-	queryset = Client.objects.none()
+	queryset = Client.objects.all()
 	serializer_class = ClientSerializer
 
-	def get_queryset(self):
-		return Client.objects.all()
 
 
 
