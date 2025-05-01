@@ -5,7 +5,7 @@ from .views import PaymentViewSet
 
 router = DefaultRouter()
 
-router.register(r'trainers', PaymentViewSet, basename='trainers')
+router.register(r'trainer', PaymentViewSet, basename='trainers')
 
 urlpatterns = [
 	path('', include(router.urls)),  # Все `ViewSet` уже включены сюда
