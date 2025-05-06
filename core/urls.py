@@ -14,10 +14,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from allauth.account.views import ConfirmEmailView
+from allauth.account.views import ConfirmEmailView, confirm_email
 from django.contrib import admin
 from django.urls import path, include, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,9 +33,10 @@ urlpatterns = [
     # Redoc
     path('api/v1/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('api/v1/auth/', include('dj_rest_auth.urls')),
-    re_path(
-		"^registration/account-confirm-email/(?P<key>[-:\w]+)/$",
-		ConfirmEmailView.as_view(),
+	# path('accounts/', include('allauth.urls')),
+	re_path(
+		r"api/v1/auth/registration/account-confirm-email/(?P<key>[-:\w]+)/$",
+		confirm_email,
 		name="account_confirm_email",
 	),
 	path('api/v1/auth/registration/', include('dj_rest_auth.registration.urls')),

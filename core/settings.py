@@ -36,6 +36,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 	'jazzmin',
+
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+
 	'rest_framework',
 	'rest_framework_simplejwt',
 	'rest_framework.authtoken',
@@ -50,14 +58,8 @@ INSTALLED_APPS = [
 	'dj_rest_auth',
 	'dj_rest_auth.registration',
 
-	'django.contrib.admin',
-	'django.contrib.auth',
-	'django.contrib.contenttypes',
-	'django.contrib.sessions',
-	'django.contrib.messages',
-	'django.contrib.staticfiles',
 
-	'accounts',
+	# 'accounts',
 	'analytics',
 	'clients',
 	'fitness_clubs',
@@ -67,7 +69,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-	"allauth.account.middleware.AccountMiddleware",
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
@@ -75,6 +76,7 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	"allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -159,17 +161,18 @@ REST_FRAMEWORK = {
 REST_AUTH = {
 	'USE_JWT': True,
 	'JWT_AUTH_HTTPONLY': False,
+	'TEMPLATE_EXTENSION': 'json'
 	# 'LOGIN_SERIALIZER': 'custom_auth.serializers.CustomLoginSerializer',
 	# "REGISTER_SERIALIZER": "custom_auth.serializers.CustomRegisterSerializer",
 	# 'TOKEN_SERIALIZER': 'custom_auth.serializers.CustomTokenSerializer',
 }
 AUTHENTICATION_BACKENDS = [
-
 	# Needed to login by username in Django admin, regardless of `allauth`
 	'django.contrib.auth.backends.ModelBackend',
 
 	# `allauth` specific authentication methods, such as login by email
-	'allauth.account.auth_backends.AuthenticationBackend',
+	'allauth.account.auth_backends.AuthenticationBackend',  # allauth
+
 
 ]
 
@@ -211,12 +214,14 @@ SPECTACULAR_SETTINGS = {
 # SIGNUP_FIELDS = {'username': {'required': True}, 'email': {'required': True}, 'password1': {'required': True},
 #                  'password2': {'required': True}}
 # ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
+SITEstring_ID = 1
 ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = False
 
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Требует подтверждения email
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # Требует подтверждения email
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_UNIQUE_EMAIL = True
+
 
 EMAIL_BACKEND = env("EMAIL_BACKEND")
 EMAIL_HOST = env("EMAIL_HOST")
@@ -224,3 +229,9 @@ EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+
+
+LOGIN_URL = '/admin/login/'
+LOGOUT_URL = '/admin/logout/'
+LOGIN_REDIRECT_URL = '/admin/'
+
