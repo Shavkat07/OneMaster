@@ -208,13 +208,14 @@ SPECTACULAR_SETTINGS = {
 	'VERSION': '1.0.0',
 	'SERVE_INCLUDE_SCHEMA': False,
 	# OTHER SETTINGS
-	'COMPONENT_SPLIT_REQUEST': True
+	'COMPONENT_SPLIT_REQUEST': True,
+	'SWAGGER_UI_SETTINGS': {
+		'persistAuthorization': True  # Keeps token after refresh
+	},
 }
 
-# SIGNUP_FIELDS = {'username': {'required': True}, 'email': {'required': True}, 'password1': {'required': True},
-#                  'password2': {'required': True}}
-# ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
-SITEstring_ID = 1
+SITE_ID = 1
+
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_REQUIRED = False
 
