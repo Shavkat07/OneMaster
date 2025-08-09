@@ -62,7 +62,7 @@ It's ideal for trainers who want to move from paper notebooks and messy spreadsh
 bash
 
 ```bash
-git clone https://github.com/yourusername/FitnessTrainerCRM.git
+git clone https://github.com/Shavkat07/OneMaster.git
 cd OneMaster
 python -m venv venv
 source venv/bin/activate
